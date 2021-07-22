@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="0" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Provide Automation Test Suite" duration-ms="17" started-at="2020-10-16T12:20:34 IST" finished-at="2020-10-16T12:20:34 IST">
+    <groups>
+    </groups>
+    <test name="Provide app Test" duration-ms="17" started-at="2020-10-16T12:20:34 IST" finished-at="2020-10-16T12:20:34 IST">
+    </test> <!-- Provide app Test -->
+  </suite> <!-- Provide Automation Test Suite -->
+</testng-results>
