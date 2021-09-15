@@ -1,0 +1,8 @@
+#surefire_0
+#Wed Sep 15 11:32:39 IST 2021
+Name=TestDataProvideFr
+FileName=TestDataProvideFr
+File=sbs.xml
+user.dir=D\:\\Selenium\\selenium-automation\\provide
+localRepository=C\:\\Users\\anchaudhary\\.m2\\repository
+basedir=D\:\\Selenium\\selenium-automation\\provide

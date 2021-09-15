@@ -35,6 +35,8 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+
+
 public class Util {
     
 	
@@ -56,7 +58,7 @@ public class Util {
 	
 	public static Workbook createOutPutSheet(String inputFile, String outputFile ) {
 		 FileSystem system = FileSystems.getDefault();
-	        Path original = system.getPath(inputFile);
+        Path original = system.getPath(inputFile);
 	        Path target = system.getPath(outputFile);
            Workbook workbook = null;
 	        try {
@@ -112,14 +114,14 @@ public class Util {
 
 	@SuppressWarnings("unchecked")
 	
-	public static HashMap<Integer, HashMap<String,String>> getExcelData() throws Exception {
+	public static HashMap<Integer, HashMap<String,String>> getExcelData(String Name) throws Exception {
 		String path = System.getProperty("user.dir");
 		HashMap<Integer, HashMap<String,String>> map = new HashMap<Integer,HashMap<String,String>>();
 		HashMap<String,String> mapInner = new HashMap<String,String>();
 		
 		try {
 			 
-			FileInputStream src = new FileInputStream(path + "\\test\\TestDataProvide.xlsx");
+			FileInputStream src = new FileInputStream(path + "\\test\\"+Name+".xlsx");
 			Workbook workbook = new XSSFWorkbook(src);
 			Sheet sheet = workbook.getSheetAt(0);
 			 
@@ -291,18 +293,42 @@ public class Util {
 	
 	
 	//For SBS136 entity to select form
-public static void navigateToPurchasingSBS136FR(WebDriverWait wait,WebElement webelement,JavascriptExecutor javascriptExecutor,String type ) {
+public static void navigateToPurchasingSBS136FR(WebDriverWait wait,WebElement webelement,JavascriptExecutor javascriptExecutor,String organization,String type ) {
 	
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.beStandardXpath))).click();
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.searchHomeXpath)));
 	
 	webelement = (WebElement) javascriptExecutor.executeScript("return "+ProvidePom.shopFRButtonXpath);
 	webelement.click();
 	
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.searchSubmitXpath)));
+	webelement = (WebElement) javascriptExecutor.executeScript("return "+ProvidePom.shopXpath);
+	webelement.click();
+	
+	// select organization
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.organizationSearchBoxXpath)));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.selectDropDownXpath)));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.modalTitleXpath)));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.fieldContaierXpath))).click();
+	wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ProvidePom.organizationSearchXpath))).sendKeys(organization);
+	
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.organizationCountXpath)));
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.organizationPanelXpath +organization+"]"))).click();
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.organizationSelectButtonXpath))).click();
+	
 	
 		if(type.equalsIgnoreCase("DA")) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.beStandardXpath))).click();
-		} else
+		} else if(type.equalsIgnoreCase("DI")) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.beHomeXpath))).click();
+		}
+		else if(type.equalsIgnoreCase("Subcontracting")) {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.beSubcontractingXpath))).click();
+			}
+		else if(type.equalsIgnoreCase("Logistics")) {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.beLogisticsXpath))).click();
+		} else 
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.beStandardSBS136Xpath))).click();
+			
 		
 	}
 	
@@ -352,12 +378,15 @@ public static void navigateToPurchasingSBS136FR(WebDriverWait wait,WebElement we
 	public static void newPrRequisitionFR(WebDriverWait wait ,String orderDescription ,String purchaseCategory,String productName,String supplier,String quantity,String unitPrice,String currency,String prType) {
 		 
 
+		 
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.orderDescription))).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.orderDescription))).sendKeys(orderDescription);
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategoryButtonXpath))).click();
 		String category= purchaseCategory.substring(0, 1)+purchaseCategory.substring(1,purchaseCategory.length()).toUpperCase();
 		System.out.println(category);
+	
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySelect1Xpath+category+ProvidePom.purchaseCategorySelect2Xpath))).click();
 	
 		
@@ -390,6 +419,139 @@ public static void navigateToPurchasingSBS136FR(WebDriverWait wait,WebElement we
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeSelect1XpathFR+prType+ProvidePom.prTypeSelect2XpathFR))).click();
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.editRequisitionXpath))).click();
+	}
+	
+	
+	
+	// SBS136 new PR Requisition
+	
+	public static void newPrRequisitionSBS136(WebDriverWait wait ,String orderDescription ,String purchaseCategory,String codeProduct,String productName,String supplier,String quantity,String unitPrice,String currency,String prType,String PRForm) {
+		 
+		if(PRForm.equalsIgnoreCase("Subcontracting") || PRForm.equalsIgnoreCase("Logistics")) {
+
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.orderDescription))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.orderDescription))).sendKeys(orderDescription);
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierProductNameSBS136SubcontractingXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierProductNameSBS136SubcontractingXpath))).sendKeys(productName);
+			
+		
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategoryButtonXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySearchXpath))).sendKeys(purchaseCategory);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySelect1Xpath+purchaseCategory+ProvidePom.purchaseCategorySelect2Xpath))).click();
+		
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierButtonXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierSearchXpath))).sendKeys(supplier);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierSelect1XpathFR+supplier+ProvidePom.supplierSelect2XpathFR))).click();
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.quantityXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.quantityXpath))).sendKeys(quantity);
+			
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.unitPriceXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.unitPriceXpath))).sendKeys(unitPrice);
+			
+			
+				currency=currency.toUpperCase();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencyButtonXpath))).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencySearchXpath))).sendKeys(currency);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencySearch1Xpath+currency+ProvidePom.currencySearch2Xpath))).click();
+				
+			
+	
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.editRequisitionXpath))).click();
+		}
+		
+		else {
+		
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.orderDescription))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.orderDescription))).sendKeys(orderDescription);
+		
+		
+	    
+		if(PRForm.equalsIgnoreCase("Standard")) {
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategoryButtonXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySearchXpath))).sendKeys(purchaseCategory);
+		
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySelect1Xpath+purchaseCategory+ProvidePom.purchaseCategorySelect2Xpath))).click();
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.codeProductXpathFR))).clear();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.codeProductXpathFR))).sendKeys(productName);
+			
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierButtonXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierSearchXpath))).sendKeys(supplier);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierSelect1XpathFR+supplier+ProvidePom.supplierSelect2XpathFR))).click();
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.quantityXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.quantityXpath))).sendKeys(quantity);
+			
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.unitPriceXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.unitPriceXpath))).sendKeys(unitPrice);
+			
+			
+				currency=currency.toUpperCase();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencyButtonXpath))).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencySearchXpath))).sendKeys(currency);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencySearch1Xpath+currency+ProvidePom.currencySearch2Xpath))).click();
+				
+			
+			
+		
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeButtonXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeSearchXpath))).sendKeys(prType);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeSelect1Xpath+prType+ProvidePom.prTypeSelect2Xpath))).click();
+			
+		}else {
+			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategoryButtonXpath))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySearchXpathFR))).sendKeys(purchaseCategory);
+			
+			if(prType.equalsIgnoreCase("DI")) {
+				purchaseCategory= purchaseCategory.substring(0, 1)+purchaseCategory.substring(1,purchaseCategory.length()).toUpperCase();
+			}
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.purchaseCategorySelect1Xpath+purchaseCategory+ProvidePom.purchaseCategorySelect2Xpath))).click();
+		
+		// code Product
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.codeProductXpathFR))).clear();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.codeProductXpathFR))).sendKeys(codeProduct);
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierProductNameFR))).clear();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierProductNameFR))).sendKeys(productName);
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierButtonXpath))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierSearchXpathFR))).sendKeys(supplier);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.supplierSelect1XpathFR+supplier+ProvidePom.supplierSelect2XpathFR))).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.quantityXpathFR))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.quantityXpathFR))).sendKeys(quantity);
+		
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.unitPriceXpathFR))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.unitPriceXpathFR))).sendKeys(unitPrice);
+		
+		
+			currency=currency.toUpperCase();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencyButtonXpathFR))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencySearchXpathFR))).sendKeys(currency);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.currencySearch1XpathFR+currency+ProvidePom.currencySearch2XpathFR))).click();
+			
+		
+		
+	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeButtonXpathFR))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeSearchXpathFR))).sendKeys(prType);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.prTypeSelect1XpathFR+prType+ProvidePom.prTypeSelect2XpathFR))).click();
+		}
+		
+		
+	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.editRequisitionXpath))).click();
+		}
 	}
 	
 	
@@ -552,55 +714,8 @@ public static void navigateToPurchasingSBS136FR(WebDriverWait wait,WebElement we
 		}
 	
 	
-	
-		/*
-		 * if(type.equalsIgnoreCase("A")) { if(agency.equalsIgnoreCase("0933")) {
-		 * 
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspXpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspDivXpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearchXpath))).sendKeys("AT SBGM 2020 (933)");
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearch1Xpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearchXpath))).clear();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearchXpath))).sendKeys("AT SBGM 2020 (933)");
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearch1Xpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSelect1Xpath+"AT SBGM 2020 (933)"+ProvidePom.sspSelect2Xpath))).click();
-		 * 
-		 * }
-		 * 
-		 * if(agency.equalsIgnoreCase("0900")) {
-		 * 
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspXpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspDivXpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearchXpath))).sendKeys("99");
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearch1Xpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearchXpath))).clear();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearchXpath))).sendKeys("99");
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSearch1Xpath))).click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.
-		 * sspSelect1Xpath+"99"+ProvidePom.sspSelect2Xpath))).click();
-		 * 
-		 * }
-		 */
-	
 
 
-	
-	
 	
 		
 		if(!realEstateReference.isEmpty()) {
@@ -615,17 +730,17 @@ public static void navigateToPurchasingSBS136FR(WebDriverWait wait,WebElement we
 		
 		}
 		
-		if(prType.equalsIgnoreCase("DI")) {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverXpath))).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverDivXpath))).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearchXpath))).sendKeys(Approver);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearch1Xpath))).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearchXpath))).clear();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearchXpath))).sendKeys(Approver);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearch1Xpath))).click();
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSelect1Xpath+Approver+ProvidePom.approverSelect2Xpath))).click();
-	
-	}
+//		if(prType.equalsIgnoreCase("DI")) {
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverXpath))).click();
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverDivXpath))).click();
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearchXpath))).sendKeys(Approver);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearch1Xpath))).click();
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearchXpath))).clear();
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearchXpath))).sendKeys(Approver);
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSearch1Xpath))).click();
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.approverSelect1Xpath+Approver+ProvidePom.approverSelect2Xpath))).click();
+//	
+//	}
 		
 		
 		
@@ -677,10 +792,11 @@ public static void  viewDetailsFR(WebDriverWait wait,String quantity,String unit
 		price= Integer.parseInt(quantity)*Integer.parseInt(unitPrice); 
 		String sellingPrice= Integer.toString(price);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.sellingPriceXpath))).sendKeys(sellingPrice);
-		
+		if(!paymentTerms.isEmpty()) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.paymentTermsButtonXpath))).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.paymentTermsSearchXpath))).sendKeys(paymentTerms);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.paymentTermsSelect1Xpath+paymentTerms+ProvidePom.paymentTermsSelect2Xpath))).click();
+		}
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.lineDataSaveXpath))).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ProvidePom.lineDataSaveButtonVisibleXpath)));
