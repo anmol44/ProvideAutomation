@@ -6,7 +6,7 @@ public class ProvidePom {
 	static String password="Provide2018";
 	
 	static final String FILE_NAME = "C:\\Users\\anchaudhary\\Desktop\\MyFirstExcel.xlsx";
-	public static final String inputFile = System.getProperty("user.dir") +"/test/TestDataProvide.xlsx";
+	public static final String inputFile = System.getProperty("user.dir") +"/test/";
 	public static final String outputFile = System.getProperty("user.dir") +"/Output/OutputDataProvide.xlsx";
 	
 	static String url="https://voflusoprastdev.p2p.basware.com";
@@ -24,12 +24,30 @@ public class ProvidePom {
 	
 	public static String docType = "Purchase requisition";
 	
+	static String searchHomeXpath="//span[@class='pal-search-submit-text ng-scope' and contains(text(),'Search')]";
 	static String shopFRButtonXpath="document.querySelector('alusta-navigation').shadowRoot.querySelector('div > nav > div.pt-navbar-nav.main-nav > ul > li:nth-child(2) > a')";
+	
+	//select organization
+	static String searchSubmitXpath="//button[@class='btn pal-search-submit' and @type='submit']";
+	static String shopXpath = "document.querySelector('alusta-navigation').shadowRoot.querySelector('div > nav.pt-navbar-second-level > div:nth-child(2) > ul > li:nth-child(1) > a')";
+	static String selectDropDownXpath= "//div[@class='pal-tree-select dropdown']";
+	static String modalTitleXpath ="//span[@class='modal-title ng-binding']";
+	static String fieldContaierXpath="/html/body/div[1]/div/div/pal-modal/div/div[2]/pal-modal-body/pal-field-container/div/div/div/pal-tree-single-select/div/div[1]/div";
+	static String organizationSearchBoxXpath="//div[@class='modal-content']";
+	static String organizationSearchButtonXpath="//button[@class='pal-tree-select-toggle-btn']";
+	static String organizationSearchXpath="//input[@class='pal-tree-select-input margin-xs form-control ng-pristine ng-untouched ng-valid ng-scope ng-empty']";
+	static String organizationCountXpath = "//div[@class='pal-tree-view-item-count ng-scope']";
+	static String organizationPanelXpath ="//div[@class='pal-tree-view-nodes']//child::pal-tree-item//child::div[@data-t-node-code=";
+	static String organizationSelect1Xpath="//span[@class='pal-tree-item-code ng-binding' and contains(text(),'";
+	static String organizationSelect2Xpath="')]//parent::span";
+	static String organizationSelectButtonXpath="//button[@class='btn btn-pal-action-button ng-scope']";
+	
 	
 	static String beStandardXpath = "//*/div[@class='card-icon fa fa-shopping-bag']";
 	public static String beStandardGalittXpath = "//div[@class='card-icon fa fa-map-marker']";
 	static String beLogisticsXpath = "//div[@class='card-icon fa fa-building']";
 	static String beSubcontractingXpath = "//div[@class='card-icon fa fa-user']";
+	static String beStandardSBS136Xpath = "//div[@class='card-icon fa fa-map-marker']";
 	
 	static String beHomeXpath="//*/div[@class='card-icon fa fa-home']";
 	static String orderDescription = "/html/body/div/section/section/section/div/form/ul/li[1]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-text-field/pal-field-container/div/div/div/input";
@@ -41,6 +59,8 @@ public class ProvidePom {
     static String purchaseCategorySelect2Xpath = "')]/parent::span";
     static String purchaseCategorySearchXpathFR  ="/html/body/div/section/section/section/div/form/ul/li[2]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-category-field/pal-field-container/div/div/div/pal-tree-single-select/div/div[2]/pal-tree-view/div/div[1]/div/input";
 
+    static String codeProductXpathFR="//input[@class='form-control ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope ng-empty ng-valid-required ng-valid-minlength ng-valid-maxlength']";
+    
     static String supplierButtonXpath = "//button[@type='button' and @class='pal-single-select-toggle-btn'][1]";
 	static String supplierSearchXpath = "/html/body/div/section/section/section/div/form/ul/li[4]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-category-supplier-field/pal-field-container/div/div/div/pal-single-select/div/div[2]/pal-single-select-dropdown/div/div[1]/div/input";
 	static String supplierSearchXpathFR="/html/body/div/section/section/section/div/form/ul/li[5]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-category-supplier-field/pal-field-container/div/div/div/pal-single-select/div/div[2]/pal-single-select-dropdown/div/div[1]/div/input";
@@ -49,6 +69,8 @@ public class ProvidePom {
 	
 	static String supplierSelect1XpathFR="//span[@class='ui-select-highlight' and contains(text(),'";
 	static String supplierSelect2XpathFR = "')]";
+	
+	static String supplierProductNameSBS136SubcontractingXpath= "/html/body/div/section/section/section/div/form/ul/li[2]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-text-field/pal-field-container/div/div/div/input";
 	
 	static String quantityXpath = "/html/body/div/section/section/section/div/form/ul/li[5]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-decimal-field/pal-field-container/div/div/div/input";
 	static String quantityXpathFR="/html/body/div/section/section/section/div/form/ul/li[6]/span/div/bw-freetext-field-switcher/div/div/bw-freetext-decimal-field/pal-field-container/div/div/div/input";
@@ -111,8 +133,8 @@ public class ProvidePom {
 	static String agencyDivXpath = "(//div[@class='pal-single-select-dropdown-header'])[3]";
 	static String agencySearchXpath = "/html/body/div/bw-purchase-requisition-details/section/pal-two-col-row/div/div[1]/div/pal-two-col-row-left-content/div/bw-personal-requisition-details-lines/div/div/div[2]/div/div/pal-catalog/div[1]/div/pal-catalog-list/div/div[2]/pal-catalog-items/pal-catalog-item/div/div[2]/div[2]/div[3]/div/bw-purchase-requisition-coding-row-editor/div/div[1]/pal-detail-fields/div/pal-detail-field[6]/div/div/bw-purchase-requisition-panel-field/div/bw-purchase-panel-field-switch/div/div/div/bw-lookup-list/div/pal-single-select/div/div[2]/pal-single-select-dropdown/div/div[1]/div/input";
 	static String agencySearch1Xpath ="(//span[@class='psl-icon-search ng-scope'])[3]";
-	static String agencySelect1Xpath = "//span[@class='ui-select-highlight' and contains(text(),'";
-	static String agencySelect2Xpath = "')]";
+	static String agencySelect1Xpath = "//span[@class='ui-select-highlight' and starts-with(text(),'";
+	static String agencySelect2Xpath = "')]//parent::span[@class='ng-binding' and not(text()[normalize-space(.)])]";
 	
 	
 	static String sspXpath = "(//button[@class='pal-single-select-toggle-btn' ])[4]";
@@ -145,7 +167,7 @@ public class ProvidePom {
 	static String sellingPriceXpath = "/html/body/div/bw-purchase-requisition-line-details/div/pal-two-col-row/div/div[1]/div/pal-two-col-row-left-content/div/bw-purchase-line-data-panel/div/div/div[2]/div/div[1]/div/pal-detail-fields/div/pal-detail-field[16]/div/div/bw-purchase-requisition-panel-field/div/bw-purchase-panel-field-switch/div/div/div/input";
 	static String paymentTermsButtonXpath="(//button[@class='pal-single-select-toggle-btn'])[3]";
 	static String paymentTermsSearchXpath="/html/body/div/bw-purchase-requisition-line-details/div/pal-two-col-row/div/div[1]/div/pal-two-col-row-left-content/div/bw-purchase-line-data-panel/div/div/div[2]/div/div[1]/div/pal-detail-fields/div/pal-detail-field[20]/div/div/bw-purchase-requisition-panel-field/div/bw-purchase-panel-field-switch/div/div/div/bw-lookup-list/div/pal-single-select/div/div[2]/pal-single-select-dropdown/div/div[1]/div/input";
-	static String paymentTermsSelect1Xpath="//span[@class='ng-binding' and contains(text(),'";
+	static String paymentTermsSelect1Xpath="//span[@class='ui-select-highlight' and contains(text(),'";
 	static String paymentTermsSelect2Xpath="')]";
 	
 	static String lineDataSaveXpath = "(//button[@class='btn ng-binding'])[1]";

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Provide Automation Test Suite]">
+  <test thread-count="5" name="Provide app Test(failed)">
+    <parameter name="entity" value="sbs136"/>
+    <classes>
+      <class name="org.provide.runnable.run">
+        <methods>
+          <include name="runMainScript" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- org.provide.runnable.run -->
+    </classes>
+  </test> <!-- Provide app Test(failed) -->
+</suite> <!-- Failed suite [Provide Automation Test Suite] -->

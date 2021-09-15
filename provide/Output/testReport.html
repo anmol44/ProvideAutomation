@@ -52,7 +52,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>Jul 8, 2021 11:48:08 AM</span>
+			<span class='label blue darken-3 suite-start-time'>Sep 13, 2021 11:21:11 AM</span>
 			</a>
 		</ul>
 	</div>
@@ -67,8 +67,7 @@
 				<i class='material-icons'>warning</i> Status
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
-										<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
-					<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+										<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -111,10 +110,10 @@
                     <canvas id='parent-analysis' width='90' height='70'></canvas>
                 </div>
                 <div class='block text-small'>
-                    <span class='tooltipped' data-position='top' data-tooltip='33.333%'><span class='strong'>1</span> test(s) passed</span>
+                    <span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> test(s) passed</span>
                 </div>
                 <div class='block text-small'>
-                    <span class='strong tooltipped' data-position='top' data-tooltip='66.667%'>2</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> skipped
+                    <span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> skipped
                 </div>
             </div>
         </div>
@@ -132,17 +131,17 @@
 </div>	<div class='subview-left left'>
 		<div class='view-summary'>
 			<ul id='test-collection' class='test-collection'>
-				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>Reading Excel File</span>
-						<span class='test-time'>Jul 8, 2021 11:48:08 AM</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-time'>Sep 13, 2021 11:21:11 AM</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jul 8, 2021 11:48:08 AM</span>
-	<span class='label end-time'>Jul 8, 2021 11:48:09 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 1s+10ms</span>
+	<span class='label start-time'>Sep 13, 2021 11:21:11 AM</span>
+	<span class='label end-time'>Sep 13, 2021 11:21:18 AM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 7s+273ms</span>
 </div>
 <div class='test-steps'>
 	<table class='bordered table-results'>
@@ -156,159 +155,17 @@
 		<tbody>
 			<tr class='log' status='pass'>
 				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>11:48:09 AM</td>
+				<td class='timestamp'>11:21:11 AM</td>
 				<td class='step-details'>
 						Data imported
 					
 				</td>
 			</tr>
-		</tbody>
-	</table>
-</div>
-					</div>
-				</li>
-				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
-					<div class='test-heading'>
-						<span class='test-name'>PR REQUISITION : 1</span>
-						<span class='test-time'>Jul 8, 2021 11:48:14 AM</span>
-						<span class='test-status right fail'>fail</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jul 8, 2021 11:48:14 AM</span>
-	<span class='label end-time'>Jul 8, 2021 11:49:25 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 1m 11s+660ms</span>
-</div>
-<div class='test-steps'>
-	<table class='bordered table-results'>
-		<thead>
-			<tr>
-				<th>Status</th>
-				<th>Timestamp</th>
-				<th>Details</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='log' status='info'>
-				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>11:48:14 AM</td>
-				<td class='step-details'>
-						Login as PR creator.
-					
-				</td>
-			</tr>
-			<tr class='log' status='pass'>
-				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>11:48:18 AM</td>
-				<td class='step-details'>
-						Log in PR creator : Successful.
-					
-				</td>
-			</tr>
 			<tr class='log' status='fail'>
 				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>11:49:19 AM</td>
+				<td class='timestamp'>11:21:18 AM</td>
 				<td class='step-details'>
-						PR REQUISITION: 1org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='card-icon fa fa-map-marker'] (tried for 50 second(s) with 500 milliseconds interval)
-					
-				</td>
-			</tr>
-			<tr class='log' status='fail'>
-				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>11:49:20 AM</td>
-				<td class='step-details'>
-						Error Snapshot below:
-					<img class='r-img' onerror='this.style.display="none"' data-featherlight='../ErrorScreenshots/PR_REQUISITION_1.png' src='../ErrorScreenshots/PR_REQUISITION_1.png'>
-				</td>
-			</tr>
-			<tr class='log' status='pass'>
-				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>11:49:20 AM</td>
-				<td class='step-details'>
-						Logout for Creater 1
-					
-				</td>
-			</tr>
-			<tr class='log' status='info'>
-				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>11:49:25 AM</td>
-				<td class='step-details'>
-						Creator Logged out
-					
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-					</div>
-				</li>
-				<li class='test displayed active  fail' status='fail' bdd='false' test-id='3'>
-					<div class='test-heading'>
-						<span class='test-name'>PR REQUISITION : 2</span>
-						<span class='test-time'>Jul 8, 2021 11:49:25 AM</span>
-						<span class='test-status right fail'>fail</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jul 8, 2021 11:49:25 AM</span>
-	<span class='label end-time'>Jul 8, 2021 11:50:35 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 1m 9s+803ms</span>
-</div>
-<div class='test-steps'>
-	<table class='bordered table-results'>
-		<thead>
-			<tr>
-				<th>Status</th>
-				<th>Timestamp</th>
-				<th>Details</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='log' status='info'>
-				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>11:49:25 AM</td>
-				<td class='step-details'>
-						Login as PR creator.
-					
-				</td>
-			</tr>
-			<tr class='log' status='pass'>
-				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>11:49:28 AM</td>
-				<td class='step-details'>
-						Log in PR creator : Successful.
-					
-				</td>
-			</tr>
-			<tr class='log' status='fail'>
-				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>11:50:29 AM</td>
-				<td class='step-details'>
-						PR REQUISITION: 2org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@class='card-icon fa fa-map-marker'] (tried for 50 second(s) with 500 milliseconds interval)
-					
-				</td>
-			</tr>
-			<tr class='log' status='fail'>
-				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>11:50:30 AM</td>
-				<td class='step-details'>
-						Error Snapshot below:
-					<img class='r-img' onerror='this.style.display="none"' data-featherlight='../ErrorScreenshots/PR_REQUISITION_2.png' src='../ErrorScreenshots/PR_REQUISITION_2.png'>
-				</td>
-			</tr>
-			<tr class='log' status='pass'>
-				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>11:50:30 AM</td>
-				<td class='step-details'>
-						Logout for Creater 2
-					
-				</td>
-			</tr>
-			<tr class='log' status='info'>
-				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>11:50:35 AM</td>
-				<td class='step-details'>
-						Creator Logged out
+						Data imported Failed
 					
 				</td>
 			</tr>
@@ -345,7 +202,7 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>3</div>
+					<div class='panel-lead'>1</div>
 				</div>
 			</div>
 			<div class='col s2'>
@@ -357,19 +214,19 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jul 8, 2021 11:48:08 AM</div>
+					<div class='panel-lead'>Sep 13, 2021 11:21:11 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jul 8, 2021 11:50:42 AM</div>
+			 		<div class='panel-lead'>Sep 13, 2021 11:21:18 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 2m 33s+730ms</div>
+					<div class='panel-lead'>0h 0m 7s+389ms</div>
 				</div>
 			</div>
 		</div>
@@ -380,14 +237,14 @@
 		<!-- container -->
 		<script>
 			var statusGroup = {
-                parentCount: 3,
-				passParent: 1,
-				failParent: 2,
+                parentCount: 1,
+				passParent: 0,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 2,
+				exceptionsParent: 1,
 				childCount: 0,
 				passChild: 0,
 				failChild: 0,
@@ -412,7 +269,7 @@
 		</script>
 		<script>
 			var timeline = {
-			        "Reading Excel File":1.01,"PR REQUISITION : 1":71.66,"PR REQUISITION : 2":69.803
+			        "Reading Excel File":7.273
 			};
 		</script>
 	

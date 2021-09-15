@@ -19,20 +19,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.provide.commons.AzureLibraries;
 import org.provide.commons.ProvidePom;
 import org.provide.commons.Util;
-import org.provide.spain.Runnable;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 
-import apache.poi.ss.usermodel.Cell;
 import apache.poi.ss.usermodel.CellStyle;
 import apache.poi.ss.usermodel.Row;
 
 public class ProvideGalitt extends Util {
 	
-	static Logger log = Logger.getLogger(Runnable.class.getName());
+	static Logger log = Logger.getLogger(ProvideGalitt.class.getName());
 	static WebDriver driver;
 	static WebDriverWait wait;
 	static WebElement webelement;
@@ -55,7 +55,10 @@ public class ProvideGalitt extends Util {
 	static CellStyle style;
 	static String testCase="TestCase";
 	
-	public static void main(String args[]) throws Exception {
+	@Test
+	@Parameters("Name")
+	
+	public static void Galit(String Name) throws Exception {
 		
 		ExtentReports extent = Util.initializeExtendReport();
 		ExtentTest test = extent.createTest("Reading Excel File", "");
@@ -63,21 +66,21 @@ public class ProvideGalitt extends Util {
 			// Util.login(driver, log, ProvidePom.username, ProvidePom.password,
 			// ProvidePom.url);
 
-			 System.out.println(Util.getExcelData());
+			 System.out.println(Util.getExcelData(Name));
 
 			System.out.println(extent);
 			tests= new HashMap<String,String>();
 			testCaseNameList= new ArrayList<String>();
 			testCaseIdList = new ArrayList<String>();
 			durationTime = new LinkedHashMap<String,String>();
-			excelData = Util.getExcelData();
+			excelData = Util.getExcelData(Name);
 			test.log(Status.PASS, "Data imported");
 			  
 			driver = Util.setUp();
 			wait = new WebDriverWait(driver, 50);
 			javascriptExecutor = (JavascriptExecutor) driver;
 			
-			workbook=	 (XSSFWorkbook) Util.createOutPutSheet(ProvidePom.inputFile,ProvidePom.outputFile);
+			workbook=	 (XSSFWorkbook) Util.createOutPutSheet(ProvidePom.inputFile+Name+".xlsx",ProvidePom.outputFile);
 			 sheet=workbook.getSheetAt(0);
 			 System.out.println(excelData.get(1).size());
 			 cell = sheet.getRow(0).createCell(excelData.get(1).size()+1);

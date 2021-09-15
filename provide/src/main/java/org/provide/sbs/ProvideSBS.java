@@ -1,39 +1,34 @@
-package org.provide.sbs136;
+package org.provide.sbs;
 
    
 
 	import java.io.FileOutputStream;
-	import java.io.IOException;
-	import java.util.HashMap;
-	import java.util.logging.Logger;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.logging.Logger;
 
-	import org.apache.poi.ss.usermodel.Cell;
-	import org.apache.poi.ss.usermodel.CellStyle;
-	import org.apache.poi.ss.usermodel.Row;
-	import org.apache.poi.xssf.usermodel.XSSFSheet;
-	import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-	import org.openqa.selenium.JavascriptExecutor;
-	import org.openqa.selenium.WebDriver;
-	import org.openqa.selenium.WebElement;
-	import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.provide.commons.ProvidePom;
+import org.provide.commons.Util;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-	import org.provide.commons.ProvidePom;
-	import org.provide.spain.Runnable;
-	import org.provide.commons.Util;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 
-	import org.provide.commons.ProvidePom;
-
-	import org.provide.commons.Util;
-
-
-	import com.aventstack.extentreports.ExtentReports;
-	import com.aventstack.extentreports.ExtentTest;
-	import com.aventstack.extentreports.MediaEntityBuilder;
-	import com.aventstack.extentreports.Status;
-
-	public class ProvideSBS136  extends Util {
+	public class ProvideSBS   {
 		
-		static Logger log = Logger.getLogger(Runnable.class.getName());
+		static Logger log = Logger.getLogger(ProvideSBS.class.getName());
 		static WebDriver driver;
 		static WebDriverWait wait;
 		static WebElement webelement;
@@ -47,7 +42,10 @@ package org.provide.sbs136;
 		static String concate=".";
 		 static CellStyle style;
 		
-		public static void main(String args[]) throws IOException {
+		 @Test
+		 @Parameters("Name")
+		public static void SBS(String Name) throws IOException {
+			 System.out.println(Name);
 			
 			ExtentReports extent = Util.initializeExtendReport();
 			ExtentTest test = extent.createTest("Reading Excel File", "");
@@ -55,18 +53,16 @@ package org.provide.sbs136;
 				// Util.login(driver, log, ProvidePom.username, ProvidePom.password,
 				// ProvidePom.url);
 
-				 System.out.println(Util.getExcelData());
+				 System.out.println(Util.getExcelData(Name));
 
-				System.out.println(extent);
-				
-				excelData = Util.getExcelData();
+			excelData = Util.getExcelData(Name);
 				test.log(Status.PASS, "Data imported");
 				  
 				driver = Util.setUp();
 				wait = new WebDriverWait(driver, 50);
 				javascriptExecutor = (JavascriptExecutor) driver;
 				
-				workbook=	 (XSSFWorkbook) Util.createOutPutSheet(ProvidePom.inputFile,ProvidePom.outputFile);
+				workbook=	 (XSSFWorkbook) Util.createOutPutSheet(ProvidePom.inputFile+Name+".xlsx",ProvidePom.outputFile);
 				 sheet=workbook.getSheetAt(0);
 				 System.out.println(excelData.get(1).size());
 				 cell = sheet.getRow(0).createCell(excelData.get(1).size()+1);
@@ -81,7 +77,7 @@ package org.provide.sbs136;
 				
 			}
 			
-			 for (int i = 1; i <= excelData.size(); i++) {
+			 for (int i = 1; i <=excelData.size() ; i++) {  //excelData.size()
 					status="PASS";
 					test = extent.createTest("PR REQUISITION : "+i, "");
 					try {
@@ -98,12 +94,12 @@ package org.provide.sbs136;
 						}
 					
 					
-					Util.navigateToPurchasingFR(wait,excelData.get(i).get("PR tYPE"));
+					Util.navigateToPurchasingSBS136FR(wait, webelement, javascriptExecutor,excelData.get(i).get("Organization"), excelData.get(i).get("PRForm"));
 					//test.log(Status.PASS, "Edit Pr Requisition Page");
 					test.log(Status.INFO, "Entering Data for Edit Requisition.");
-					Util.newPrRequisitionFR(wait, excelData.get(i).get("OrderDesc"), excelData.get(i).get("PurchaseCategory"),excelData.get(i).get("Product Name"),
+					Util.newPrRequisitionSBS136(wait, excelData.get(i).get("OrderDesc"), excelData.get(i).get("PurchaseCategory"),excelData.get(i).get("ProductCode"),excelData.get(i).get("Product Name"),
 							excelData.get(i).get("Supplier"), excelData.get(i).get("Quantity"),
-							excelData.get(i).get("UnitPrice"),excelData.get(i).get("Currency"), excelData.get(i).get("PR tYPE"));
+							excelData.get(i).get("UnitPrice"),excelData.get(i).get("Currency"), excelData.get(i).get("PR tYPE"),excelData.get(i).get("PRForm"));
 					test.log(Status.PASS, "Data Entered for Edit Requisition Page.");
 					test.log(Status.INFO, "Entering Header Data");
 					Util.headerData(wait,excelData.get(i).get("Requestor"));
@@ -135,11 +131,19 @@ package org.provide.sbs136;
 					}
 					
 					String orderDescription = "";
-					String reviewer=excelData.get(i).get("Reviewer");
-					if(!reviewer.equals(null)) {
+					int j = 1;
+					String Reviewer = "Reviewer";
+					
+					String reviewer=excelData.get(i).get(Reviewer+j);
+					
+					
+					
 					test.log(Status.INFO, "Review processs");
-					Util.login(driver, wait, log, excelData.get(i).get("Reviewer"),excelData.get(i).get("Password"), excelData.get(i).get("Url"));
-					test.log(Status.PASS, "Login for Review");
+					
+					while (excelData.get(i).containsKey(Reviewer + j) && !excelData.get(i).get(Reviewer + j).isEmpty()) {
+						System.out.println(excelData.get(i).containsKey(Reviewer + j));
+					Util.login(driver, wait, log, excelData.get(i).get("Reviewer"+j),excelData.get(i).get("Password"), excelData.get(i).get("Url"));
+					test.log(Status.PASS, "Login for Reviewer"+j);
 					Util.getApprove(wait);
 					orderDescription = Util.getTaskList(wait, excelData.get(i).get("OrderDesc"),ProvidePom.docType);
 					
@@ -148,7 +152,7 @@ package org.provide.sbs136;
 						//	test.log(Status.INFO, "Approve");
 							try {
 							Util.getReview(wait);
-							test.log(Status.PASS, "PR: "+PRNumber+" reviewed  by reviewer ");
+							test.log(Status.PASS, "PR: "+PRNumber+" reviewed  by reviewer "+j);
 							Util.logOut(driver,wait,webelement, javascriptExecutor);
 							//test.log(Status.PASS, "Logout for Approver"+j);
 							Thread.sleep(5000);
@@ -174,7 +178,7 @@ package org.provide.sbs136;
 								
 						} else {
 							status="FAIL";
-							test.log(Status.FAIL, "NO PR Found for Reviewer");
+							test.log(Status.FAIL, "NO PR Found for Reviewer"+j);
 							try {
 								String errorSc =concate+ Util.attachedScreenShot(driver,"PR_REQUISITION_"+i+"_Reviewer_");
 								
@@ -197,16 +201,16 @@ package org.provide.sbs136;
 							ex.printStackTrace();
 						}
 							}
-					
-					
-					
+					j++;
 					}
+					
+					
 					test.log(Status.INFO, "Approving Process Started");
-					int j = 1;
+					 j = 1;
 					String Approver = "Approver";
 					System.out.println( excelData.get(i).get(Approver + j));
 					 //
-					while (excelData.get(i).containsKey(Approver + j)) {
+					while (excelData.get(i).containsKey(Approver + j) && !excelData.get(i).get(Approver + j).isEmpty()) {
 
 						Util.login(driver, wait, log, excelData.get(i).get(Approver + j),excelData.get(i).get("Password"), excelData.get(i).get("Url"));
 						test.log(Status.PASS, "Login for Approver"+j);
