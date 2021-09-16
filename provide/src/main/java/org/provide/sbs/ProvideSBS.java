@@ -28,21 +28,21 @@ import com.aventstack.extentreports.Status;
 
 	public class ProvideSBS   {
 		
-		static Logger log = Logger.getLogger(ProvideSBS.class.getName());
+		static Cell cell;
 		static WebDriver driver;
+		static HashMap<Integer, HashMap<String,String>> excelData;
+		static JavascriptExecutor javascriptExecutor;
+		static Logger log = Logger.getLogger(ProvideSBS.class.getName());
+		static   Row row ;
+		static  XSSFSheet sheet;
+		static String status=" ";
+		static CellStyle style;
 		static WebDriverWait wait;
 		static WebElement webelement;
-		static JavascriptExecutor javascriptExecutor;
-		static HashMap<Integer, HashMap<String,String>> excelData;
 		static  XSSFWorkbook workbook;
-		static  XSSFSheet sheet;
-		static   Row row ;
-		static Cell cell;
-		static String status=" ";
 		static String concate=".";
-		 static CellStyle style;
 		
-		 @Test
+		@Test
 		 @Parameters("Name")
 		public static void SBS(String Name) throws IOException {
 			 System.out.println(Name);
@@ -347,6 +347,8 @@ import com.aventstack.extentreports.Status;
 			
 			
 		}
+
+		
 
 	}
 

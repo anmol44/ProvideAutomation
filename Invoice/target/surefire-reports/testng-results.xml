@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="30" started-at="2021-09-14T20:10:34Z" finished-at="2021-09-14T20:10:34Z">
+  <suite name="Suite" duration-ms="27" started-at="2021-11-14T12:01:58Z" finished-at="2021-11-14T12:01:58Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="30" started-at="2021-09-14T20:10:34Z" finished-at="2021-09-14T20:10:34Z">
+    <test name="Test" duration-ms="27" started-at="2021-11-14T12:01:58Z" finished-at="2021-11-14T12:01:58Z">
       <class name="org.provide.sbs.invoice.ProvideSBS">
-        <test-method status="FAIL" signature="SBS(java.lang.String)[pri:0, instance:org.provide.sbs.invoice.ProvideSBS@12e61fe6]" name="SBS" duration-ms="5" started-at="2021-09-15T01:40:34Z" finished-at="2021-09-15T01:40:34Z">
+        <test-method status="FAIL" signature="SBS(java.lang.String)[pri:0, instance:org.provide.sbs.invoice.ProvideSBS@12e61fe6]" name="SBS" duration-ms="4" started-at="2021-11-14T17:31:58Z" finished-at="2021-11-14T17:31:58Z">
           <params>
             <param index="0">
               <value>
