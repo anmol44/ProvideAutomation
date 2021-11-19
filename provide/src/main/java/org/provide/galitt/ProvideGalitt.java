@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,9 +28,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-
-import apache.poi.ss.usermodel.CellStyle;
-import apache.poi.ss.usermodel.Row;
 
 public class ProvideGalitt extends Util {
 	
@@ -49,7 +48,7 @@ public class ProvideGalitt extends Util {
 	static  XSSFWorkbook workbook;
 	static  XSSFSheet sheet;
 	static   Row row ;
-	static XSSFCell cell;
+	static Cell cell;
 	static String status=" ";
 	static String concate=".";
 	static CellStyle style;
