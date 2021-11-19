@@ -2,22 +2,22 @@
 <testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="30" started-at="2021-10-16T23:21:50 IST" finished-at="2021-10-16T23:21:50 IST">
+  <suite name="Default suite" duration-ms="44" started-at="2021-11-17T16:21:32 IST" finished-at="2021-11-17T16:21:32 IST">
     <groups>
     </groups>
-    <test name="Test" duration-ms="30" started-at="2021-10-16T23:21:50 IST" finished-at="2021-10-16T23:21:50 IST">
-      <class name="org.provide.spain.ProvideSpain">
-        <test-method status="FAIL" signature="Spain(java.lang.String)[pri:0, instance:org.provide.spain.ProvideSpain@32a068d1]" name="Spain" duration-ms="0" started-at="2021-10-16T23:21:50 IST" finished-at="2021-10-16T23:21:50 IST">
+    <test name="Default test" duration-ms="44" started-at="2021-11-17T16:21:32 IST" finished-at="2021-11-17T16:21:32 IST">
+      <class name="org.provide.sbs.ProvideSBS">
+        <test-method status="FAIL" signature="SBS(java.lang.String)[pri:0, instance:org.provide.sbs.ProvideSBS@32a068d1]" name="SBS" duration-ms="0" started-at="2021-11-17T16:21:32 IST" finished-at="2021-11-17T16:21:32 IST">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Parameter 'Name' is required by @Test on method Spain but has not been marked @Optional or defined
-in D:\Selenium\selenium-automation\provide\spain.xml]]>
+Parameter 'Name' is required by @Test on method SBS but has not been marked @Optional or defined
+in C:\Users\anchaudhary\AppData\Local\Temp\testng-eclipse-444901800\testng-customsuite.xml]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
-Parameter 'Name' is required by @Test on method Spain but has not been marked @Optional or defined
-in D:\Selenium\selenium-automation\provide\spain.xml
+Parameter 'Name' is required by @Test on method SBS but has not been marked @Optional or defined
+in C:\Users\anchaudhary\AppData\Local\Temp\testng-eclipse-444901800\testng-customsuite.xml
 at org.testng.internal.Parameters.createParams(Parameters.java:268)
 at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:356)
 at org.testng.internal.Parameters.createParameters(Parameters.java:700)
@@ -50,8 +50,8 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Spain -->
-      </class> <!-- org.provide.spain.ProvideSpain -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+        </test-method> <!-- SBS -->
+      </class> <!-- org.provide.sbs.ProvideSBS -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
