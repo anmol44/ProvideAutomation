@@ -164,9 +164,9 @@ public class ProvidePom {
 	static String viewDetailsButtonXpath = "(//button[@class='dropdown-btn btn-pal-actions-button'])[1]";
 	
 	static String lineDataXpath = "//button[@class='btn btn-secondary btn-action-icon ng-scope']";
-	static String sellingPriceXpath = "/html/body/div/bw-purchase-requisition-line-details/div/pal-two-col-row/div/div[1]/div/pal-two-col-row-left-content/div/bw-purchase-line-data-panel/div/div/div[2]/div/div[1]/div/pal-detail-fields/div/pal-detail-field[16]/div/div/bw-purchase-requisition-panel-field/div/bw-purchase-panel-field-switch/div/div/div/input";
-	static String paymentTermsButtonXpath="(//button[@class='pal-single-select-toggle-btn'])[3]";
-	static String paymentTermsSearchXpath="/html/body/div/bw-purchase-requisition-line-details/div/pal-two-col-row/div/div[1]/div/pal-two-col-row-left-content/div/bw-purchase-line-data-panel/div/div/div[2]/div/div[1]/div/pal-detail-fields/div/pal-detail-field[20]/div/div/bw-purchase-requisition-panel-field/div/bw-purchase-panel-field-switch/div/div/div/bw-lookup-list/div/pal-single-select/div/div[2]/pal-single-select-dropdown/div/div[1]/div/input";
+	static String sellingPriceXpath = "(//input[@class='form-control editor-focusable ng-pristine ng-untouched ng-valid ng-empty'])[3]";
+	static String paymentTermsButtonXpath="(//button[@class='pal-single-select-toggle-btn'])[4]";
+	static String paymentTermsSearchXpath="/html/body/div/bw-purchase-requisition-line-details/div/pal-two-col-row/div/div[1]/div/pal-two-col-row-left-content/div/bw-purchase-line-data-panel/div/div/div[2]/div/div[1]/div/pal-detail-fields/div/pal-detail-field[19]/div/div/bw-purchase-requisition-panel-field/div/bw-purchase-panel-field-switch/div/div/div/bw-lookup-list/div/pal-single-select/div/div[2]/pal-single-select-dropdown/div/div[1]/div/input";
 	static String paymentTermsSelect1Xpath="//span[@class='ui-select-highlight' and contains(text(),'";
 	static String paymentTermsSelect2Xpath="')]";
 	

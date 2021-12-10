@@ -98,7 +98,7 @@ public class Util {
 		TakesScreenshot ts = (TakesScreenshot)driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
 		//String dest = System.getProperty("user.dir") +"\\ErrorScreenshots\\"+name+".png";
-		String dest = "./ErrorScreenshots/"+name+".png";
+		String dest = "./Output/ErrorScreenshots/"+name+".png";
 		
 		File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		

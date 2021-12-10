@@ -1,0 +1,9 @@
+org\provide\beleux\ProvideBeleux.class
+org\provide\commons\ProvidePom.class
+org\provide\commons\Util.class
+org\provide\sbs\ProvideSBS.class
+org\provide\france\ProvideFrance.class
+org\provide\galitt\ProvideGalitt.class
+org\provide\commons\AzureLibraries.class
+org\provide\commons\AzureLibraries$1.class
+org\provide\spain\ProvideSpain.class
